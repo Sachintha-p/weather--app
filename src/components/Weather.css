@@ -1,76 +1,192 @@
 .weather {
     place-self: center;
     padding: 40px;
-    border-radius: 10px;
+    border-radius: 20px;
     background-image: linear-gradient(45deg, #2f4680, #500ae4);
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.search-bar {
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     min-width: 400px;
+    transition: background-image 0.5s ease-in-out;
 }
 
+/* --- Search Bar Container --- */
+.search-bar {
+    display: flex;
+    align-items: center; /* Locks everything to the vertical center */
+    justify-content: space-between;
+    background: #ffffff;
+    border-radius: 50px;
+    padding: 10px 20px;
+    gap: 12px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+/* Input Field */
 .search-bar input {
-    height: 50px;
+    flex: 1; /* Takes up all remaining space */
+    height: 40px;
     border: none;
     outline: none;
-    padding-left: 20px;
-    padding-right: 50px;
-    border-radius: 30px;
-    color: #000;
-    background: #ffffff;
+    background: transparent;
     font-size: 18px;
-    flex-grow: 1;
+    color: #444;
+    margin: 0;
+    padding: 0;
 }
 
-.search-bar img {
-    position: absolute;
-    right: 35px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 25px;
-    height: 25px;
+/* --- Buttons (Search & Location) --- */
+.search-icon, .location-icon {
+    width: 45px;       /* Fixed circular size */
+    height: 45px;
+    background: #e0f2f1; /* Visible Light Teal */
+    border-radius: 50%;
+    display: flex;     /* Centers the SVG inside the circle */
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    filter: invert(100%);
+    transition: all 0.3s ease;
+    flex-shrink: 0;    /* Prevents buttons from squishing */
 }
-.weather-icon{
+
+.search-icon:hover, .location-icon:hover {
+    background: #b2dfdb; /* Darker teal on hover */
+    transform: scale(1.08); /* Slight pop effect */
+}
+
+/* SVG Specifics (Ensures icons are dark and centered) */
+.search-icon svg, .location-icon svg {
+    width: 20px;
+    height: 20px;
+    color: #555; /* Dark Grey Color */
+    display: block; /* Fixes alignment quirks */
+}
+
+/* --- Weather Display --- */
+.weather-icon {
     width: 150px;
     margin: 30px 0;
 }
+
 .temperature {
     color: white;
     font-size: 80px;
     line-height: 1;
+    font-weight: 600;
 }
+
 .location {
     color: white;
     font-size: 40px;
+    margin-top: 10px;
+    text-transform: capitalize;
 }
-.weather-data{
+
+.weather-data {
     width: 100%;
     margin-top: 40px;
     color: #fff;
     display: flex;
     justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
-.weather-data .col{
+
+.weather-data .col {
     display: flex;
     align-items: flex-start;
     gap: 12px;
     font-size: 22px;
 }
-.weather-data .col span{
+
+.weather-data .col span {
     display: block;
     font-size: 16px;
+    margin-top: 5px;
 }
-.weather-data .col img{
+
+.weather-data .col img {
     width: 26px;
-    margin-top: 10px;
+    margin-top: 5px;
+}
+
+/* --- Status Messages --- */
+.loading-msg {
+    margin-top: 50px;
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: 500;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.error-msg {
+    margin-top: 50px;
+    font-size: 20px;
+    color: #ffcccc; /* Soft red for errors */
+    font-weight: 500;
+    text-align: center;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+.forecast {
+    width: 100%;
+    margin-top: 30px;
+    color: white;
+}
+
+.forecast h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-align: left;
+    margin-left: 10px;
+    opacity: 0.9;
+}
+
+.forecast-container {
+    display: flex;
+    justify-content: space-between; /* Spreads items out evenly */
+    gap: 10px;
+}
+
+.forecast-item {
+    background: rgba(255, 255, 255, 0.2); /* Glass effect */
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 18%; /* Fits 5 items perfectly */
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.forecast-item:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-5px); /* Hop effect on hover */
+}
+
+.forecast-item .day {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.forecast-item img {
+    width: 30px; /* Smaller icons for forecast */
+    margin: 5px 0;
+}
+
+.forecast-item .temp {
+    font-size: 16px;
+    font-weight: 600;
 }
